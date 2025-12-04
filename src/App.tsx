@@ -1,5 +1,11 @@
+import { EditorPage } from "./components/EditorPage/EditorPage";
+
 const App = () => {
-  return <></>;
+  return (
+    <>
+      <EditorPage />
+    </>
+  );
 };
 
 export { App };
