@@ -1,14 +1,15 @@
-import { Box, Button, Grid } from "@chakra-ui/react";
+import { Box, Grid } from '@chakra-ui/react'
+import { SingleField } from './SingleField'
 
 const fields = [
-  { label: "Text input", type: "text" },
-  { label: "Textarea", type: "textarea" },
-  { label: "Checkbox", type: "checkbox" },
-  { label: "Radio", type: "radio" },
-  { label: "Select", type: "select" },
-  { label: "Date", type: "date" },
-  { label: "Number", type: "number" },
-];
+  { label: 'Text input', type: 'text', id: '1', required: false },
+  { label: 'Textarea', type: 'textarea', id: '2', required: false },
+  { label: 'Checkbox', type: 'checkbox', id: '3', required: false },
+  { label: 'Radio', type: 'radio', id: '4', required: false },
+  { label: 'Select', type: 'select', id: '5', required: false },
+  { label: 'Date', type: 'date', id: '6', required: false },
+  { label: 'Number', type: 'number', id: '7', required: false },
+]
 
 const SideBar = () => {
   return (
@@ -18,13 +19,11 @@ const SideBar = () => {
       </Box>
       <Grid templateColumns="repeat(2,1fr)" gap="4">
         {fields.map((field) => (
-          <Button size="sm" variant="outline" key={field.type}>
-            {field.label}
-          </Button>
+          <SingleField field={field} key={field.id} />
         ))}
       </Grid>
     </Box>
-  );
-};
+  )
+}
 
-export { SideBar };
+export { SideBar }
