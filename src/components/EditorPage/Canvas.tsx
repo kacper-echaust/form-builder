@@ -1,16 +1,35 @@
 import { Box, Stack } from '@chakra-ui/react'
-import type { Field } from '../../types'
+import { useDroppable } from '@dnd-kit/core'
+import { useContext } from 'react'
+import { CanvasFieldsContext } from '../../context/CanvasFieldsContext'
 
-const Canvas = ({ fields }: { fields: Field[] | [] }) => {
+const Canvas = () => {
+  const { canvasFields } = useContext(CanvasFieldsContext)
+  const { setNodeRef } = useDroppable({ id: 'canvas' })
+  console.log(canvasFields)
   return (
-    <Box flex="1" p="6" minH="100vh" flexShrink={0} bgColor="#fafafa">
-      <Box mb="4" fontWeight="bold" fontSize="lg">
-        Canvas (Your Form)
+    <Box
+      ref={setNodeRef}
+      flex="1"
+      p="6"
+      minH="100vh"
+      flexShrink={0}
+      bgColor="#fafafa"
+    >
+      <Box
+        mb="4"
+        fontWeight="bold"
+        fontSize="lg"
+        color="black"
+        textAlign="center"
+      >
+        Canvas
       </Box>
+
       <Stack>
-        {fields.map((field) => (
+        {canvasFields.map((field) => (
           <Box
-            key={field.type}
+            key={field.uid}
             p="4"
             bg="white"
             color="black"
