@@ -4,3 +4,9 @@ export type Field = {
   label: string
   required: boolean
 }
+export type CanvasFieldsType = {
+  id: string
+  label: string
+  type: string
+  uid: string
+}
