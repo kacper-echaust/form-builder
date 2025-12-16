@@ -22,7 +22,7 @@ const SingleField = ({ field }: { field: Field }) => {
           : undefined,
       }}
     >
-      {field.label}
+      {field.name}
     </Button>
   )
 }
