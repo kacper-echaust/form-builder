@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react'
 import { SideBar } from './SideBar'
 import { Canvas } from './Canvas'
-import { Inspector } from './Inspector'
+import { Inspector } from './Inspector/Inspector'
 import { DndContext } from '@dnd-kit/core'
 import { useCanvasFields } from '../../hooks/useCanvasFields'
 import type { DragEndEvent } from '@dnd-kit/core'
