@@ -1,14 +1,7 @@
 import { Field, Input, Checkbox } from '@chakra-ui/react'
+import type { FieldSettings } from '../../../types'
 
-type Props = {
-  onChange: (field: string, value: string | boolean) => void
-  formValues: {
-    label: string
-    required: boolean
-  }
-}
-
-const DefaultInputs = ({ onChange, formValues }: Props) => {
+const DefaultInputs = ({ onChange, formValues }: FieldSettings) => {
   const { label, required } = formValues
   return (
     <>

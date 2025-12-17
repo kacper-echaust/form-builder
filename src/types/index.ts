@@ -18,6 +18,7 @@ export type FormType = {
   minLength?: string
   maxLength?: string
   options?: SelectOption[]
+  fromTo?: DateOption
 }
 export type FieldSettings = {
   onChange: (field: string, value: FieldValue) => void
@@ -28,4 +29,9 @@ export type SelectOption = {
   optionName: string
 }
 
-export type FieldValue = string | boolean | SelectOption[]
+export type FieldValue = string | boolean | SelectOption[] | DateOption
+
+type DateOption = {
+  from: string
+  to: string
+}
