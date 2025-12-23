@@ -23,6 +23,7 @@ export type FormType = {
 export type FieldSettings = {
   onChange: (field: string, value: FieldValue) => void
   formValues: FormType
+  errors: FormErrors
 }
 export type SelectOption = {
   id: string
@@ -35,3 +36,4 @@ type DateOption = {
   from: string
   to: string
 }
+export type FormErrors = Partial<Record<keyof FormType, string>>
