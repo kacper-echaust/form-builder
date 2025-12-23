@@ -7,7 +7,6 @@ import { MdDraw } from 'react-icons/md'
 const Canvas = () => {
   const { canvasFields, setCanvasFields } = useContext(CanvasFieldsContext)
   const { setNodeRef } = useDroppable({ id: 'canvas' })
-  console.log(canvasFields)
   const handleEdit = (uid: string) => {
     setCanvasFields((prev) => {
       const isEdited = prev.find((field) => field.isEdit === true)
