@@ -1,8 +1,9 @@
-import { Field, Input, Flex } from '@chakra-ui/react'
+import { Field, Input } from '@chakra-ui/react'
 import type { FieldSettings } from '../../../types'
+import { MaxMinLength } from './MaxMinLength'
 
-const TextareaSettings = ({ onChange, formValues }: FieldSettings) => {
-  const { placeholder, minLength, maxLength } = formValues
+const TextareaSettings = ({ onChange, formValues, errors }: FieldSettings) => {
+  const { placeholder } = formValues
   return (
     <>
       <Field.Root>
@@ -13,26 +14,11 @@ const TextareaSettings = ({ onChange, formValues }: FieldSettings) => {
           value={placeholder}
         />
       </Field.Root>
-      <Flex>
-        <Field.Root padding="2">
-          <Field.Label>Min characters</Field.Label>
-          <Input
-            name="minLength"
-            type="number"
-            onChange={(e) => onChange('minLength', e.target.value)}
-            value={minLength}
-          />
-        </Field.Root>
-        <Field.Root padding="2">
-          <Field.Label>Max characters</Field.Label>
-          <Input
-            name="maxLength"
-            type="number"
-            onChange={(e) => onChange('maxLength', e.target.value)}
-            value={maxLength}
-          />
-        </Field.Root>
-      </Flex>
+      <MaxMinLength
+        errors={errors}
+        onChange={onChange}
+        formValues={formValues}
+      />
     </>
   )
 }
