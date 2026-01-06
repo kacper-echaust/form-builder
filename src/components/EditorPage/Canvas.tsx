@@ -61,6 +61,10 @@ const Canvas = () => {
               <Flex justifyContent="space-between" width="60px">
                 <Icon
                   size="md"
+                  _hover={{
+                    color: 'white',
+                  }}
+                  transition="all 0.2s ease"
                   onClick={() => {
                     handleDelete(field.uid)
                   }}
