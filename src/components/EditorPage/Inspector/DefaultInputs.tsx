@@ -1,24 +1,25 @@
 import { Field, Input, Checkbox } from '@chakra-ui/react'
 import type { FieldSettings } from '../../../types'
 
-const DefaultInputs = ({ onChange, formValues }: FieldSettings) => {
+const DefaultInputs = ({ onChange, formValues, errors }: FieldSettings) => {
   const { label, required } = formValues
   return (
     <>
-      <Field.Root>
+      <Field.Root invalid={!!errors.label}>
         <Field.Label>Label</Field.Label>
         <Input
-          value={label}
+          value={label ?? ''}
           name="label"
           onChange={(e) => {
             onChange('label', e.target.value)
           }}
         />
+        <Field.ErrorText>{errors.label}</Field.ErrorText>
       </Field.Root>
 
       <Checkbox.Root
         name="required"
-        checked={required}
+        checked={required ?? false}
         onCheckedChange={({ checked }) => {
           onChange('required', checked)
         }}

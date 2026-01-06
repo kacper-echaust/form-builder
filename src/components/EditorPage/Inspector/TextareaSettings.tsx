@@ -6,13 +6,14 @@ const TextareaSettings = ({ onChange, formValues, errors }: FieldSettings) => {
   const { placeholder } = formValues
   return (
     <>
-      <Field.Root>
+      <Field.Root invalid={!!errors.placeholder}>
         <Field.Label>Placeholder</Field.Label>
         <Input
           name="placeholder"
           onChange={(e) => onChange('placeholder', e.target.value)}
-          value={placeholder}
+          value={placeholder ?? ''}
         />
+        <Field.ErrorText>{errors.placeholder}</Field.ErrorText>
       </Field.Root>
       <MaxMinLength
         errors={errors}

@@ -2,6 +2,7 @@ import { Flex, Field, Input } from '@chakra-ui/react'
 import type { FieldSettings } from '../../../types'
 
 const MaxMinLength = ({ errors, onChange, formValues }: FieldSettings) => {
+  const { maxLength, minLength } = formValues
   return (
     <Flex>
       <Field.Root padding="2" invalid={!!errors.minLength}>
@@ -12,7 +13,7 @@ const MaxMinLength = ({ errors, onChange, formValues }: FieldSettings) => {
           name="minLength"
           type="number"
           onChange={(e) => onChange('minLength', e.target.value)}
-          value={formValues.minLength}
+          value={minLength ?? '0'}
         />
         <Field.ErrorText>{errors.minLength}</Field.ErrorText>
       </Field.Root>
@@ -24,7 +25,7 @@ const MaxMinLength = ({ errors, onChange, formValues }: FieldSettings) => {
           name="maxLength"
           type="number"
           onChange={(e) => onChange('maxLength', e.target.value)}
-          value={formValues.maxLength}
+          value={maxLength ?? '0'}
         />
         <Field.ErrorText>{errors.maxLength}</Field.ErrorText>
       </Field.Root>
