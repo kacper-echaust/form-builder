@@ -3,14 +3,14 @@ import type { FieldSettings } from '../../../types'
 import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa'
 import { type ChangeEvent } from 'react'
 
-const SelectSettings = ({ onChange, formValues }: FieldSettings) => {
+const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
   const { placeholder, options } = formValues
   const selectOptions = options || []
 
   const handleAddOption = () => {
     const id = crypto.randomUUID()
     const updated = [...selectOptions, { id, optionName: 'Add some option' }]
-
+    if (updated.length > 9) return
     onChange('options', updated)
   }
   const handleDeleteOption = (id: string) => {
@@ -26,16 +26,18 @@ const SelectSettings = ({ onChange, formValues }: FieldSettings) => {
   }
   return (
     <>
-      <Field.Root>
+      <Field.Root invalid={!!errors.placeholder}>
         <Field.Label>Placeholder</Field.Label>
         <Input
           name="placeholder"
           onChange={(e) => onChange('placeholder', e.target.value)}
-          value={placeholder}
+          value={placeholder ?? ''}
         />
+        <Field.ErrorText>{errors.placeholder}</Field.ErrorText>
       </Field.Root>
-      <Field.Root padding="2">
+      <Field.Root padding="2" invalid={!!errors.options}>
         <Field.Label>Options</Field.Label>
+        <Field.ErrorText>{errors.options}</Field.ErrorText>
         <Flex width="70%" justifyContent="space-between" alignItems="center">
           <Button
             backgroundColor="transparent"
