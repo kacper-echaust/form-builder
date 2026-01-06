@@ -2,13 +2,13 @@ import { Box, Grid } from '@chakra-ui/react'
 import { SingleField } from './SingleField'
 
 const fields = [
-  { label: 'Text input', type: 'text', id: '1', required: false },
-  { label: 'Textarea', type: 'textarea', id: '2', required: false },
-  { label: 'Checkbox', type: 'checkbox', id: '3', required: false },
-  { label: 'Radio', type: 'radio', id: '4', required: false },
-  { label: 'Select', type: 'select', id: '5', required: false },
-  { label: 'Date', type: 'date', id: '6', required: false },
-  { label: 'Number', type: 'number', id: '7', required: false },
+  { name: 'Text input', type: 'text', id: '1', required: false },
+  { name: 'Textarea', type: 'textarea', id: '2', required: false },
+  { name: 'Checkbox', type: 'checkbox', id: '3', required: false },
+  { name: 'Radio', type: 'radio', id: '4', required: false },
+  { name: 'Select', type: 'select', id: '5', required: false },
+  { name: 'Date', type: 'date', id: '6', required: false },
+  { name: 'Number', type: 'number', id: '7', required: false },
 ]
 
 const SideBar = () => {

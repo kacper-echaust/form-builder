@@ -1,12 +1,21 @@
-import { Box, Stack } from '@chakra-ui/react'
+import { Box, Icon, Stack } from '@chakra-ui/react'
 import { useDroppable } from '@dnd-kit/core'
 import { useContext } from 'react'
 import { CanvasFieldsContext } from '../../context/CanvasFieldsContext'
+import { MdDraw } from 'react-icons/md'
 
 const Canvas = () => {
-  const { canvasFields } = useContext(CanvasFieldsContext)
+  const { canvasFields, setCanvasFields } = useContext(CanvasFieldsContext)
   const { setNodeRef } = useDroppable({ id: 'canvas' })
-  console.log(canvasFields)
+  const handleEdit = (uid: string) => {
+    setCanvasFields((prev) =>
+      prev.map((field) =>
+        field.uid === uid
+          ? { ...field, isEdit: true }
+          : { ...field, isEdit: false }
+      )
+    )
+  }
   return (
     <Box
       ref={setNodeRef}
@@ -29,15 +38,24 @@ const Canvas = () => {
       <Stack>
         {canvasFields.map((field) => (
           <Box
+            onClick={() => handleEdit(field.uid)}
             key={field.uid}
             p="4"
-            bg="white"
             color="black"
-            border="1px solid #ddd"
+            border={field.isEdit ? '2px solid' : '1px solid #ddd'}
+            borderColor={field.isEdit ? 'gray.500' : 'black'}
+            bg={field.isEdit ? 'gray.400' : 'white'}
             borderRadius="md"
             cursor="pointer"
+            display="flex"
+            justifyContent="space-between"
           >
-            {field.label || field.type}
+            {field.name}
+            {field.isEdit && (
+              <Icon size="md">
+                <MdDraw />
+              </Icon>
+            )}
           </Box>
         ))}
       </Stack>
