@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from 'react'
+
 export type Field = {
   id: string
   type: string
@@ -13,7 +15,7 @@ export type CanvasFieldsType = FormType & {
 }
 export type FormType = {
   label: string
-  placeholder?: string | undefined
+  placeholder?: string | ''
   required: boolean
   minLength?: string
   maxLength?: string
@@ -37,3 +39,12 @@ type DateOption = {
   to: string
 }
 export type FormErrors = Partial<Record<keyof FormType, string>>
+
+export type UseFormType = {
+  handleChangeForm: (field: string, value: FieldValue) => void
+  form: FormType
+  errors: Partial<Record<keyof FormType, string>>
+  handleResetForm: () => void
+  handleSubmitForm: () => boolean
+  setForm: Dispatch<SetStateAction<FormType>>
+}
