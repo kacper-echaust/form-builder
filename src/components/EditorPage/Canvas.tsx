@@ -1,8 +1,9 @@
-import { Box, Icon, Stack } from '@chakra-ui/react'
+import { Box, Flex, Icon, Stack } from '@chakra-ui/react'
 import { useDroppable } from '@dnd-kit/core'
 import { useContext } from 'react'
 import { CanvasFieldsContext } from '../../context/CanvasFieldsContext'
 import { MdDraw } from 'react-icons/md'
+import { FaTrash } from 'react-icons/fa'
 
 const Canvas = () => {
   const { canvasFields, setCanvasFields } = useContext(CanvasFieldsContext)
@@ -15,6 +16,11 @@ const Canvas = () => {
           : { ...field, isEdit: false }
       )
     )
+  }
+  const handleDelete = (uid: string) => {
+    setCanvasFields((prev) => {
+      return prev.filter((field) => field.uid !== uid)
+    })
   }
   return (
     <Box
@@ -52,9 +58,23 @@ const Canvas = () => {
           >
             {field.name}
             {field.isEdit && (
-              <Icon size="md">
-                <MdDraw />
-              </Icon>
+              <Flex justifyContent="space-between" width="60px">
+                <Icon
+                  size="md"
+                  _hover={{
+                    color: 'white',
+                  }}
+                  transition="all 0.2s ease"
+                  onClick={() => {
+                    handleDelete(field.uid)
+                  }}
+                >
+                  <FaTrash />
+                </Icon>
+                <Icon size="md">
+                  <MdDraw />
+                </Icon>
+              </Flex>
             )}
           </Box>
         ))}
