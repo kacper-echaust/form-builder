@@ -1,29 +1,51 @@
-import { useContext, useEffect, useState } from 'react'
-import type { FieldValue, FormType } from '../types'
+import { useContext, useEffect } from 'react'
 import { CanvasFieldsContext } from '../context/CanvasFieldsContext'
+import type { FormType, UseFormType } from '../types'
 
-const useInspector = () => {
+const useInspector = (formApi: UseFormType) => {
+  const { form, handleSubmitForm, handleResetForm, setForm } = formApi
   const { setCanvasFields, canvasFields } = useContext(CanvasFieldsContext)
+
   const editField = canvasFields.find((field) => field.isEdit === true)
 
-  const [form, setForm] = useState<FormType>({
-    label: editField?.label || '',
-    required: editField?.required || false,
-  })
   useEffect(() => {
-    setForm((prev) => {
-      return { ...prev, ...editField }
-    })
+    if (editField) {
+      const fields: FormType = {
+        label: editField.label || '',
+        required: editField.required || false,
+      }
+      switch (editField.type) {
+        case 'text':
+        case 'textarea':
+        case 'number':
+          fields.placeholder = editField.placeholder || ''
+          fields.minLength = editField.minLength || '1'
+          fields.maxLength = editField.maxLength || '1'
+          break
+        case 'select':
+          fields.placeholder = editField.placeholder || ''
+          fields.options = editField.options
+          break
+        case 'date':
+          fields.fromTo = editField.fromTo
+          break
+      }
+      setForm(fields)
+    }
   }, [editField])
 
-  const handleChange = (field: string, value: FieldValue) => {
-    setForm((prev) => ({
-      ...prev,
-      [field]: value,
-    }))
+  const handleEdit = (uid: string) => {
+    setCanvasFields((prev) => {
+      return prev.map((field) =>
+        field.uid === uid
+          ? { ...field, isEdit: true }
+          : { ...field, isEdit: false }
+      )
+    })
   }
-
   const handleAcceptEdit = () => {
+    if (!handleSubmitForm()) return
+    console.log('accept')
     setCanvasFields((prev) => {
       return prev.map((field) =>
         field.isEdit === true
@@ -35,10 +57,7 @@ const useInspector = () => {
           : field
       )
     })
-    setForm({
-      label: '',
-      required: false,
-    })
+    handleResetForm()
   }
   const handleCancelEdit = () => {
     setCanvasFields((prev) => {
@@ -46,14 +65,14 @@ const useInspector = () => {
         field.isEdit === true ? { ...field, isEdit: false } : field
       )
     })
+    handleResetForm()
   }
 
   return {
-    form,
-    handleChange,
     handleAcceptEdit,
     handleCancelEdit,
     editField,
+    handleEdit,
   }
 }
 
