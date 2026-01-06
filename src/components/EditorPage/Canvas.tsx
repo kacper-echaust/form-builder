@@ -8,13 +8,13 @@ const Canvas = () => {
   const { canvasFields, setCanvasFields } = useContext(CanvasFieldsContext)
   const { setNodeRef } = useDroppable({ id: 'canvas' })
   const handleEdit = (uid: string) => {
-    setCanvasFields((prev) => {
-      const isEdited = prev.find((field) => field.isEdit === true)
-      if (isEdited) return prev
-      return prev.map((field) =>
-        field.uid === uid ? { ...field, isEdit: true } : field
+    setCanvasFields((prev) =>
+      prev.map((field) =>
+        field.uid === uid
+          ? { ...field, isEdit: true }
+          : { ...field, isEdit: false }
       )
-    })
+    )
   }
   return (
     <Box
