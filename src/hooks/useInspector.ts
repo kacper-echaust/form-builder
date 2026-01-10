@@ -19,8 +19,6 @@ const useInspector = (formApi: UseFormType) => {
         case 'textarea':
         case 'number':
           fields.placeholder = editField.placeholder || ''
-          fields.minLength = editField.minLength || '1'
-          fields.maxLength = editField.maxLength || '1'
           break
         case 'select':
           fields.placeholder = editField.placeholder || ''
@@ -45,7 +43,6 @@ const useInspector = (formApi: UseFormType) => {
   }
   const handleAcceptEdit = () => {
     if (!handleSubmitForm()) return
-    console.log('accept')
     setCanvasFields((prev) => {
       return prev.map((field) =>
         field.isEdit === true
