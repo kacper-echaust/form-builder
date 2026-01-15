@@ -7,10 +7,11 @@ const DateSettings = ({ onChange, formValues, errors }: FieldSettings) => {
   const [isChecked, setIsChecked] = useState(fromTo ? true : false)
 
   const handleChange = (name: string, e: ChangeEvent<HTMLInputElement>) => {
-    if (!isChecked) return
     const dateNow = new Date().toISOString().slice(0, 10)
-    const updated = { from: fromTo?.from || dateNow, to: fromTo?.to || dateNow }
-    onChange('fromTo', { ...updated, [name]: e.target.value })
+    onChange('fromTo', {
+      from: name === 'from' ? e.target.value : (fromTo?.from ?? dateNow),
+      to: name === 'to' ? e.target.value : (fromTo?.to ?? dateNow),
+    })
   }
 
   return (

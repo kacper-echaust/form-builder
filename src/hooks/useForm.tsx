@@ -44,10 +44,11 @@ const useForm = () => {
       }
     }
     //Select
-    if (!data.options || data.options?.length < 2) {
-      newErrors.options = 'Min 2 options need to be added'
+    if (data.options) {
+      if (data.options?.length < 2) {
+        newErrors.options = 'Min 2 options need to be added'
+      }
     }
-
     setErrors(newErrors)
     return newErrors
   }
