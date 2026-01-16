@@ -12,6 +12,7 @@ export type CanvasFieldsType = FormType & {
   type: string
   uid: string
   isEdit: boolean
+  isNew: boolean
 }
 export type FormType = {
   label: string
