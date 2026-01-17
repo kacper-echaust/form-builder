@@ -6,9 +6,15 @@ import { MdDraw } from 'react-icons/md'
 import { FaTrash } from 'react-icons/fa'
 
 const Canvas = () => {
-  const { canvasFields, setCanvasFields } = useContext(CanvasFieldsContext)
+  const { canvasFields, setCanvasFields, setError } =
+    useContext(CanvasFieldsContext)
   const { setNodeRef } = useDroppable({ id: 'canvas' })
   const handleEdit = (uid: string) => {
+    const isNew = canvasFields.find((field) => field.isNew)
+    if (isNew)
+      return setError(
+        'Please complete the newly added field before editing any others.'
+      )
     setCanvasFields((prev) =>
       prev.map((field) =>
         field.uid === uid

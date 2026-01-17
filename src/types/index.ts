@@ -21,7 +21,9 @@ export type FormType = {
   minLength?: string
   maxLength?: string
   options?: SelectOption[]
-  fromTo?: DateOption
+  fromTo?: boolean
+  from?: Date
+  to?: Date
 }
 export type FieldSettings = {
   onChange: (field: string, value: FieldValue) => void
@@ -33,18 +35,23 @@ export type SelectOption = {
   optionName: string
 }
 
-export type FieldValue = string | boolean | SelectOption[] | DateOption
+export type FieldValue = string | boolean | SelectOption[] | Date
 
-type DateOption = {
-  from: string
-  to: string
-}
-export type FormErrors = Partial<Record<keyof FormType, string>>
+export type FormErrors = Partial<{
+  label?: string
+  placeholder?: string
+  required?: string
+  minLength?: string
+  maxLength?: string
+  options?: string
+  from?: string
+  to?: string
+}>
 
 export type UseFormType = {
   handleChangeForm: (field: string, value: FieldValue) => void
   form: FormType
-  errors: Partial<Record<keyof FormType, string>>
+  errors: FormErrors
   handleResetForm: () => void
   handleSubmitForm: () => boolean
   setForm: Dispatch<SetStateAction<FormType>>

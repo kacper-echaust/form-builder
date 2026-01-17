@@ -5,7 +5,6 @@ import type { FormType, UseFormType } from '../types'
 const useInspector = (formApi: UseFormType) => {
   const { form, handleSubmitForm, handleResetForm, setForm } = formApi
   const { setCanvasFields, canvasFields } = useContext(CanvasFieldsContext)
-
   const editField = canvasFields.find((field) => field.isEdit === true)
   useEffect(() => {
     if (editField) {
@@ -15,16 +14,26 @@ const useInspector = (formApi: UseFormType) => {
       }
       switch (editField.type) {
         case 'text':
+          fields.placeholder = editField.placeholder || ''
+          fields.maxLength = editField.maxLength || '0'
+          fields.minLength = editField.minLength || '0'
+          break
         case 'textarea':
+          fields.placeholder = editField.placeholder || ''
+          fields.maxLength = editField.maxLength || '0'
+          fields.minLength = editField.minLength || '0'
+          break
         case 'number':
           fields.placeholder = editField.placeholder || ''
           break
         case 'select':
           fields.placeholder = editField.placeholder || ''
-          fields.options = editField.options
+          fields.options = editField.options || []
           break
         case 'date':
-          fields.fromTo = editField.fromTo
+          fields.fromTo = editField.fromTo || false
+          fields.from = editField.from || undefined
+          fields.to = editField.from || undefined
           break
       }
       setForm(fields)

@@ -1,48 +1,37 @@
 import { Checkbox, Field, Input } from '@chakra-ui/react'
 import type { FieldSettings } from '../../../types'
-import { useState, type ChangeEvent } from 'react'
 
 const DateSettings = ({ onChange, formValues, errors }: FieldSettings) => {
-  const { fromTo } = formValues
-  const [isChecked, setIsChecked] = useState(fromTo ? true : false)
-
-  const handleChange = (name: string, e: ChangeEvent<HTMLInputElement>) => {
-    const dateNow = new Date().toISOString().slice(0, 10)
-    onChange('fromTo', {
-      from: name === 'from' ? e.target.value : (fromTo?.from ?? dateNow),
-      to: name === 'to' ? e.target.value : (fromTo?.to ?? dateNow),
-    })
-  }
-
+  const { fromTo, from, to } = formValues
   return (
     <>
       <Checkbox.Root
-        checked={isChecked}
-        onCheckedChange={() => setIsChecked((prev) => !prev)}
+        checked={fromTo}
+        onCheckedChange={({ checked }) => onChange('fromTo', checked)}
       >
         <Checkbox.HiddenInput />
         <Checkbox.Control />
         <Checkbox.Label>From to ?</Checkbox.Label>
       </Checkbox.Root>
-      {isChecked && (
+      {fromTo && (
         <>
-          <Field.Root invalid={!!errors.fromTo}>
+          <Field.Root invalid={!!errors.from}>
             <Field.Label>From</Field.Label>
             <Input
               type="date"
-              onChange={(e) => handleChange('from', e)}
-              defaultValue={new Date().toISOString().slice(0, 10)}
+              value={from?.toString() ?? ''}
+              onChange={(e) => onChange('from', e.target.value)}
             />
-            <Field.ErrorText>{errors.fromTo}</Field.ErrorText>
+            <Field.ErrorText>{errors.from}</Field.ErrorText>
           </Field.Root>
-          <Field.Root invalid={!!errors.fromTo}>
+          <Field.Root invalid={!!errors.to}>
             <Field.Label>To</Field.Label>
             <Input
               type="date"
-              onChange={(e) => handleChange('to', e)}
-              defaultValue={new Date().toISOString().slice(0, 10)}
+              value={to?.toString() ?? ''}
+              onChange={(e) => onChange('to', e.target.value)}
             />
-            <Field.ErrorText>{errors.fromTo}</Field.ErrorText>
+            <Field.ErrorText>{errors.to}</Field.ErrorText>
           </Field.Root>
         </>
       )}
