@@ -69,7 +69,9 @@ const Inspector = () => {
           />
           {getActiveField()}
           <Button onClick={handleAcceptEdit}>Accept</Button>
-          <Button onClick={handleCancelEdit}>Cancel</Button>
+          <Button onClick={handleCancelEdit} disabled={editField.isNew}>
+            Cancel
+          </Button>
         </Stack>
       ) : (
         <></>

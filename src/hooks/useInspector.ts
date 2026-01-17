@@ -7,7 +7,6 @@ const useInspector = (formApi: UseFormType) => {
   const { setCanvasFields, canvasFields } = useContext(CanvasFieldsContext)
 
   const editField = canvasFields.find((field) => field.isEdit === true)
-
   useEffect(() => {
     if (editField) {
       const fields: FormType = {
@@ -50,6 +49,7 @@ const useInspector = (formApi: UseFormType) => {
               ...field,
               ...form,
               isEdit: false,
+              isNew: false,
             }
           : field
       )
