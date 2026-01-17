@@ -24,7 +24,7 @@ const EditorPage = () => {
 
   return (
     <Flex height="100vh" alignItems="center" justifyContent="space-around">
-      {error && <ErrorBaner error={error} />}
+      {error && <ErrorBaner error={error} key={error} />}
       <DndContext onDragEnd={handleDragEnd}>
         <SideBar />
         <Canvas />
