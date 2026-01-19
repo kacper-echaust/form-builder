@@ -6,6 +6,7 @@ import { TextareaSettings } from './TextareaSettings'
 import { DateSettings } from './DateSettings'
 import { SelectSettings } from './SelectSettings'
 import { useForm } from '../../../hooks/useForm'
+import { RadioSettings } from './RadioSettings'
 
 const Inspector = () => {
   const formApi = useForm()
@@ -33,7 +34,13 @@ const Inspector = () => {
       case 'checkbox':
         return
       case 'radio':
-        return
+        return (
+          <RadioSettings
+            onChange={handleChangeForm}
+            formValues={form}
+            errors={errors}
+          />
+        )
       case 'number':
         return
       case 'select':

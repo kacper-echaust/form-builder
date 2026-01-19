@@ -45,15 +45,27 @@ const useForm = () => {
       }
     }
     //Select
-    if (data.options) {
-      if (data.options?.length < 2) {
-        newErrors.options = 'Min 2 options need to be added'
+    if (data.selectOptions) {
+      if (data.selectOptions?.length < 2) {
+        newErrors.selectOptions = 'Min 2 options need to be added'
       }
-      const hasEmptyValues = Object.values(data.options).some(
-        (value) => value.optionName === ''
+      const hasEmptyValues = Object.values(data.selectOptions).some(
+        (option) => option.value === ''
       )
       if (hasEmptyValues) {
-        newErrors.options = 'Option cannot be empty.'
+        newErrors.selectOptions = 'Option cannot be empty.'
+      }
+    }
+    //Radio
+    if (data.radioOptions) {
+      if (data.radioOptions?.length < 2) {
+        newErrors.radioOptions = 'Min 2 options need to be added'
+      }
+      const hasEmptyValues = Object.values(data.radioOptions).some(
+        (option) => option.value === ''
+      )
+      if (hasEmptyValues) {
+        newErrors.radioOptions = 'Option cannot be empty.'
       }
     }
     setErrors(newErrors)

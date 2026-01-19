@@ -28,12 +28,15 @@ const useInspector = (formApi: UseFormType) => {
           break
         case 'select':
           fields.placeholder = editField.placeholder || ''
-          fields.options = editField.options || []
+          fields.selectOptions = editField.selectOptions || []
           break
         case 'date':
           fields.fromTo = editField.fromTo || false
           fields.from = editField.from || undefined
           fields.to = editField.from || undefined
+          break
+        case 'radio':
+          fields.radioOptions = editField.radioOptions || []
           break
       }
       setForm(fields)
