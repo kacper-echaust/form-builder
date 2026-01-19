@@ -1,42 +1,32 @@
-import { Field, Input, Button, Text, Flex, Icon, Stack } from '@chakra-ui/react'
+import { Button, Field, Flex, Icon, Input, Stack, Text } from '@chakra-ui/react'
+import { FaMinusCircle, FaPlusCircle } from 'react-icons/fa'
 import type { FieldSettings } from '../../../types'
-import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa'
-import { type ChangeEvent } from 'react'
+import type { ChangeEvent } from 'react'
 
-const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
-  const { placeholder, selectOptions = [] } = formValues
-
+const RadioSettings = ({ onChange, formValues, errors }: FieldSettings) => {
+  const { radioOptions = [] } = formValues
   const handleAddOption = () => {
     const id = crypto.randomUUID()
-    const updated = [...selectOptions, { id, value: 'Add some option' }]
+    const updated = [...radioOptions, { id, value: 'Add some option' }]
     if (updated.length > 9) return
-    onChange('selectOptions', updated)
+    onChange('radioOptions', updated)
   }
   const handleDeleteOption = (id: string) => {
-    const updated = selectOptions.filter((option) => option.id !== id)
-    onChange('selectOptions', updated)
+    const updated = radioOptions.filter((option) => option.id !== id)
+    onChange('radioOptions', updated)
   }
   const handleChange = (id: string, event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
-    const updated = selectOptions.map((option) =>
+    const updated = radioOptions.map((option) =>
       option.id === id ? { ...option, value } : option
     )
-    onChange('selectOptions', updated)
+    onChange('radioOptions', updated)
   }
   return (
     <>
-      <Field.Root invalid={!!errors.placeholder}>
-        <Field.Label>Placeholder</Field.Label>
-        <Input
-          name="placeholder"
-          onChange={(e) => onChange('placeholder', e.target.value)}
-          value={placeholder ?? ''}
-        />
-        <Field.ErrorText>{errors.placeholder}</Field.ErrorText>
-      </Field.Root>
-      <Field.Root padding="2" invalid={!!errors.selectOptions}>
+      <Field.Root padding="2" invalid={!!errors.radioOptions}>
         <Field.Label>Options</Field.Label>
-        <Field.ErrorText>{errors.selectOptions}</Field.ErrorText>
+        <Field.ErrorText>{errors.radioOptions}</Field.ErrorText>
         <Flex width="70%" justifyContent="space-between" alignItems="center">
           <Button
             backgroundColor="transparent"
@@ -50,7 +40,7 @@ const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
           </Button>
         </Flex>
         <Stack>
-          {selectOptions.map((option, index) => (
+          {radioOptions.map((option, index) => (
             <Flex alignItems="center" key={option.id}>
               <Text marginRight={2}>{`${index + 1}.`}</Text>
               <Icon
@@ -76,4 +66,4 @@ const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
   )
 }
 
-export { SelectSettings }
+export { RadioSettings }

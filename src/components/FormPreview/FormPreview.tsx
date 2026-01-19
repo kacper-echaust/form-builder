@@ -32,13 +32,13 @@ const FormPreview = () => {
       fromTo,
       maxLength,
       minLength,
-      options,
+      selectOptions,
       placeholder,
     } = field
     const selectCollection = createListCollection({
       items:
-        options?.map((opt) => ({
-          label: opt.optionName,
+        selectOptions?.map((opt) => ({
+          label: opt.value,
           value: String(opt.id),
         })) ?? [],
     })
@@ -79,15 +79,24 @@ const FormPreview = () => {
         )
       case 'radio':
         return (
-          <RadioGroup.Root defaultValue="1" name={label}>
-            {field.options?.map((item) => (
-              <RadioGroup.Item key={item.optionName} value={item.optionName}>
-                <RadioGroup.ItemHiddenInput />
-                <RadioGroup.ItemIndicator />
-                <RadioGroup.ItemText>{item.optionName}</RadioGroup.ItemText>
-              </RadioGroup.Item>
-            ))}
-          </RadioGroup.Root>
+          <>
+            <Field.Label>{label}</Field.Label>
+            <RadioGroup.Root
+              defaultValue={field.radioOptions?.[0].value}
+              name={label}
+              display="flex"
+              justifyContent="space-around"
+              width="100%"
+            >
+              {field.radioOptions?.map((item) => (
+                <RadioGroup.Item key={item.value} value={item.value}>
+                  <RadioGroup.ItemHiddenInput />
+                  <RadioGroup.ItemIndicator />
+                  <RadioGroup.ItemText>{item.value}</RadioGroup.ItemText>
+                </RadioGroup.Item>
+              ))}
+            </RadioGroup.Root>
+          </>
         )
       case 'select':
         return (
