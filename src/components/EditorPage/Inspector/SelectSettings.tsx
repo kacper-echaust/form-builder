@@ -4,25 +4,24 @@ import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa'
 import { type ChangeEvent } from 'react'
 
 const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
-  const { placeholder, options } = formValues
-  const selectOptions = options || []
+  const { placeholder, selectOptions = [] } = formValues
 
   const handleAddOption = () => {
     const id = crypto.randomUUID()
-    const updated = [...selectOptions, { id, optionName: 'Add some option' }]
+    const updated = [...selectOptions, { id, value: 'Add some option' }]
     if (updated.length > 9) return
-    onChange('options', updated)
+    onChange('selectOptions', updated)
   }
   const handleDeleteOption = (id: string) => {
     const updated = selectOptions.filter((option) => option.id !== id)
-    onChange('options', updated)
+    onChange('selectOptions', updated)
   }
   const handleChange = (id: string, event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     const updated = selectOptions.map((option) =>
-      option.id === id ? { ...option, optionName: value } : option
+      option.id === id ? { ...option, value } : option
     )
-    onChange('options', updated)
+    onChange('selectOptions', updated)
   }
   return (
     <>
@@ -35,9 +34,9 @@ const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
         />
         <Field.ErrorText>{errors.placeholder}</Field.ErrorText>
       </Field.Root>
-      <Field.Root padding="2" invalid={!!errors.options}>
+      <Field.Root padding="2" invalid={!!errors.selectOptions}>
         <Field.Label>Options</Field.Label>
-        <Field.ErrorText>{errors.options}</Field.ErrorText>
+        <Field.ErrorText>{errors.selectOptions}</Field.ErrorText>
         <Flex width="70%" justifyContent="space-between" alignItems="center">
           <Button
             backgroundColor="transparent"
@@ -64,7 +63,7 @@ const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
                 <FaMinusCircle color="white" />
               </Icon>
               <Input
-                value={option.optionName}
+                value={option.value}
                 onChange={(event) => {
                   handleChange(option.id, event)
                 }}
