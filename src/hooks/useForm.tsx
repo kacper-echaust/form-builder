@@ -52,6 +52,11 @@ const useForm = () => {
       const hasEmptyValues = Object.values(data.selectOptions).some(
         (option) => option.value === ''
       )
+      const selectValues = data.selectOptions.map((option) => option.value)
+      const hasDuplicates = new Set(selectValues).size !== selectValues.length
+      if (hasDuplicates) {
+        newErrors.selectOptions = 'Each option must have a different value'
+      }
       if (hasEmptyValues) {
         newErrors.selectOptions = 'Option cannot be empty.'
       }
@@ -66,6 +71,11 @@ const useForm = () => {
       )
       if (hasEmptyValues) {
         newErrors.radioOptions = 'Option cannot be empty.'
+      }
+      const radioValues = data.radioOptions.map((option) => option.value)
+      const hasDuplicates = new Set(radioValues).size !== radioValues.length
+      if (hasDuplicates) {
+        newErrors.radioOptions = 'Each option must have a different value'
       }
     }
     setErrors(newErrors)
