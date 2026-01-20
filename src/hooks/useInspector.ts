@@ -33,7 +33,7 @@ const useInspector = (formApi: UseFormType) => {
         case 'date':
           fields.fromTo = editField.fromTo || false
           fields.from = editField.from || undefined
-          fields.to = editField.from || undefined
+          fields.to = editField.to || undefined
           break
         case 'radio':
           fields.radioOptions = editField.radioOptions || []

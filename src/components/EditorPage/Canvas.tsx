@@ -11,7 +11,7 @@ const Canvas = () => {
   const { setNodeRef } = useDroppable({ id: 'canvas' })
   const handleEdit = (uid: string) => {
     const isNew = canvasFields.find((field) => field.isNew)
-    if (isNew)
+    if (isNew && isNew.uid !== uid)
       return setError(
         'Please complete the newly added field before editing any others.'
       )
@@ -64,7 +64,7 @@ const Canvas = () => {
           >
             {field.name}
             {field.isEdit && (
-              <Flex justifyContent="space-between" width="60px">
+              <Flex justifyContent="space-between" width="60px" zIndex={99}>
                 <Icon
                   size="md"
                   _hover={{
