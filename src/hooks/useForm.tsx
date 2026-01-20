@@ -37,6 +37,10 @@ const useForm = () => {
     }
     //Date
     if (data.fromTo) {
+      if (data.from && data.to && data.from >= data.to) {
+        newErrors.to =
+          'The end date cannot be earlier than or equal the start date.'
+      }
       if (!data.from) {
         newErrors.from = 'Date need to be choose'
       }
