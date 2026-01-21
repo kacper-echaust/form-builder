@@ -14,7 +14,7 @@ const SingleField = ({ field }: { field: Field }) => {
       {...attributes}
       {...listeners}
       size="sm"
-      variant="outline"
+      variant="surface"
       style={{
         cursor: 'grab',
         transform: transform
