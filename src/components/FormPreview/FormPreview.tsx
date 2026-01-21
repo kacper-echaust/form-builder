@@ -186,7 +186,7 @@ const FormPreview = () => {
       </Heading>
       <form onSubmit={handleSubmit} style={{ width: '50%' }}>
         {canvasFields.map((field) => (
-          <Field.Root key={field.id} padding={2}>
+          <Field.Root key={field.uid} padding={2}>
             {getField(field)}
           </Field.Root>
         ))}
