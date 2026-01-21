@@ -54,8 +54,10 @@ const useInspector = (formApi: UseFormType) => {
   }
   const handleAcceptEdit = () => {
     if (!handleSubmitForm()) return
-    const sameLabel = canvasFields.filter((field) => field.label == form.label)
-    if (sameLabel.length > 0) return setError('Taki label już istnieje')
+    const sameLabel = canvasFields.filter(
+      (field) => field.label == form.label && field.uid !== editField?.uid
+    )
+    if (sameLabel.length > 0) return setError('This label already exists.')
     setCanvasFields((prev) => {
       return prev.map((field) =>
         field.isEdit === true
