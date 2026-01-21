@@ -4,7 +4,8 @@ import type { FormType, UseFormType } from '../types'
 
 const useInspector = (formApi: UseFormType) => {
   const { form, handleSubmitForm, handleResetForm, setForm } = formApi
-  const { setCanvasFields, canvasFields } = useContext(CanvasFieldsContext)
+  const { setCanvasFields, canvasFields, setError } =
+    useContext(CanvasFieldsContext)
   const editField = canvasFields.find((field) => field.isEdit === true)
   useEffect(() => {
     if (editField) {
@@ -42,7 +43,6 @@ const useInspector = (formApi: UseFormType) => {
       setForm(fields)
     }
   }, [editField])
-
   const handleEdit = (uid: string) => {
     setCanvasFields((prev) => {
       return prev.map((field) =>
@@ -54,6 +54,8 @@ const useInspector = (formApi: UseFormType) => {
   }
   const handleAcceptEdit = () => {
     if (!handleSubmitForm()) return
+    const sameLabel = canvasFields.filter((field) => field.label == form.label)
+    if (sameLabel.length > 0) return setError('Taki label już istnieje')
     setCanvasFields((prev) => {
       return prev.map((field) =>
         field.isEdit === true
