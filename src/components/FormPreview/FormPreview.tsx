@@ -39,7 +39,7 @@ const FormPreview = () => {
       items:
         selectOptions?.map((opt) => ({
           label: opt.value,
-          value: String(opt.id),
+          value: String(opt.value),
         })) ?? [],
     })
     switch (type) {
@@ -100,7 +100,11 @@ const FormPreview = () => {
         )
       case 'select':
         return (
-          <Select.Root collection={selectCollection} name={label}>
+          <Select.Root
+            collection={selectCollection}
+            name={label}
+            required={required}
+          >
             <Select.HiddenSelect />
             <Select.Label>{label}</Select.Label>
             <Select.Control>
@@ -184,13 +188,18 @@ const FormPreview = () => {
       <Heading position="absolute" top={10} size="3xl">
         Form Builder
       </Heading>
-      <form onSubmit={handleSubmit} style={{ width: '50%' }}>
+      <form onSubmit={handleSubmit} style={{ width: '50%', marginTop: '50px' }}>
         {canvasFields.map((field) => (
           <Field.Root key={field.uid} padding={2}>
             {getField(field)}
           </Field.Root>
         ))}
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          marginTop="20px"
+        >
           <Button type="submit" paddingX={10}>
             Submit
           </Button>
