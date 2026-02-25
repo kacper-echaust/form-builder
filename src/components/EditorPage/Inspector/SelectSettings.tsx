@@ -54,6 +54,7 @@ const SelectSettings = ({ onChange, formValues, errors }: FieldSettings) => {
             <Flex alignItems="center" key={option.id}>
               <Text marginRight={2}>{`${index + 1}.`}</Text>
               <Icon
+                aria-label="delete option"
                 position="absolute"
                 right={5}
                 cursor="pointer"

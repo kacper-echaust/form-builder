@@ -6,6 +6,7 @@
   ],
   "compilerOptions": {
     "target": "ESNext",
+    "types": ["vitest"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "skipLibCheck": true,

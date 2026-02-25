@@ -67,6 +67,7 @@ const Canvas = () => {
               <Flex justifyContent="space-between" width="60px" zIndex={99}>
                 <Icon
                   size="md"
+                  aria-label="trash"
                   _hover={{
                     color: 'white',
                   }}
@@ -77,7 +78,7 @@ const Canvas = () => {
                 >
                   <FaTrash />
                 </Icon>
-                <Icon size="md">
+                <Icon size="md" aria-label="draw">
                   <MdDraw />
                 </Icon>
               </Flex>

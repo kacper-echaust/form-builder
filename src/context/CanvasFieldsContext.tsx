@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState, type ReactNode } from 'react'
 import type { CanvasFieldsType } from '../types'
 
-type CanvasFieldsContextType = {
+export type CanvasFieldsContextType = {
   canvasFields: CanvasFieldsType[]
   setCanvasFields: React.Dispatch<React.SetStateAction<CanvasFieldsType[]>>
   isEditField: boolean

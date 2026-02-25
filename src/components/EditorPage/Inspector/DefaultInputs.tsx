@@ -19,7 +19,7 @@ const DefaultInputs = ({ onChange, formValues, errors }: FieldSettings) => {
 
       <Checkbox.Root
         name="required"
-        checked={required ?? false}
+        defaultChecked={required ?? false}
         onCheckedChange={({ checked }) => {
           onChange('required', checked)
         }}

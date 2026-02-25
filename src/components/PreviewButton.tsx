@@ -9,7 +9,7 @@ type Props = {
 
 const PreviewButton = ({ setPreview, preview }: Props) => {
   const { setError, canvasFields } = useContext(CanvasFieldsContext)
-  const isEdit = canvasFields.find((field) => field.isEdit)
+  const isEdit = canvasFields.some((field) => field.isEdit)
 
   const TogglePreview = () => {
     if (isEdit)
@@ -20,7 +20,8 @@ const PreviewButton = ({ setPreview, preview }: Props) => {
       return setError('Form is empty.')
     }
 
-    setPreview(!preview)
+    setPreview((prev) => !prev)
+    setError('')
   }
   return (
     <Button onClick={TogglePreview} position="absolute" top={5} left={5}>

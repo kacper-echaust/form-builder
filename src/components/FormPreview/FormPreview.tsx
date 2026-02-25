@@ -45,16 +45,15 @@ const FormPreview = () => {
     switch (type) {
       case 'text':
         return (
-          <>
+          <Field.Root required={required}>
             <Field.Label>{label}</Field.Label>
             <Input
-              required={required}
               placeholder={placeholder}
-              min={minLength}
-              max={maxLength}
+              min={minLength || undefined}
+              max={maxLength || undefined}
               name={label}
             />
-          </>
+          </Field.Root>
         )
       case 'checkbox':
         return (
@@ -66,28 +65,27 @@ const FormPreview = () => {
         )
       case 'textarea':
         return (
-          <>
+          <Field.Root required={required}>
             <Field.Label>{label}</Field.Label>
             <Textarea
               placeholder={placeholder}
-              required={required}
-              minLength={Number(minLength)}
-              maxLength={Number(maxLength)}
+              minLength={Number(minLength) || undefined}
+              maxLength={Number(maxLength) || undefined}
               name={label}
             />
-          </>
+          </Field.Root>
         )
       case 'radio':
         return (
           <>
-            <Field.Label>{label}</Field.Label>
             <RadioGroup.Root
               defaultValue={field.radioOptions?.[0].value}
-              name={label}
+              name={field.uid}
               display="flex"
               justifyContent="space-around"
               width="100%"
             >
+              <RadioGroup.Label>{label}</RadioGroup.Label>
               {field.radioOptions?.map((item) => (
                 <RadioGroup.Item key={item.value} value={item.value}>
                   <RadioGroup.ItemHiddenInput />
@@ -132,47 +130,36 @@ const FormPreview = () => {
       case 'date':
         if (fromTo) {
           return (
-            <>
-              <Field.Label>{label}</Field.Label>
+            <Field.Root required={required}>
+              <Field.Label>{`${label} from`}</Field.Label>
               <Input
-                required={required}
                 placeholder={minLength}
                 type={type}
                 name={`from ${label}`}
               />
-              <Input
-                required={required}
-                placeholder={maxLength}
-                type={type}
-                name={`to ${label}`}
-              />
-            </>
+              <Field.Label>{`${label} to`}</Field.Label>
+              <Input placeholder={maxLength} type={type} name={`to ${label}`} />
+            </Field.Root>
           )
         }
         return (
-          <>
+          <Field.Root required={required}>
             <Field.Label>{label}</Field.Label>
             <Input
-              required={required}
               placeholder={placeholder}
               min={minLength}
               max={maxLength}
               name={label}
               type={type}
             />
-          </>
+          </Field.Root>
         )
       case 'number':
         return (
-          <>
+          <Field.Root required={required}>
             <Field.Label>{label}</Field.Label>
-            <Input
-              required={required}
-              placeholder={placeholder}
-              type={type}
-              name={label}
-            />
-          </>
+            <Input placeholder={placeholder} type={type} name={label} />
+          </Field.Root>
         )
     }
   }
@@ -190,9 +177,9 @@ const FormPreview = () => {
       </Heading>
       <form onSubmit={handleSubmit} style={{ width: '50%', marginTop: '50px' }}>
         {canvasFields.map((field) => (
-          <Field.Root key={field.uid} padding={2}>
+          <Box key={field.uid} padding={2}>
             {getField(field)}
-          </Field.Root>
+          </Box>
         ))}
         <Box
           display="flex"
