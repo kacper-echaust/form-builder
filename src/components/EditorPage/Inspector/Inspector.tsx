@@ -1,12 +1,12 @@
 import { Box, Button, Stack } from '@chakra-ui/react'
 import { DefaultInputs } from './DefaultInputs'
-import { useInspector } from '../../../hooks/useInspector'
 import { TextInputSettings } from './TextInputSettings'
 import { TextareaSettings } from './TextareaSettings'
 import { DateSettings } from './DateSettings'
 import { SelectSettings } from './SelectSettings'
 import { useForm } from '../../../hooks/useForm'
 import { RadioSettings } from './RadioSettings'
+import { useInspector } from '../../../hooks/useInspector'
 
 const Inspector = () => {
   const formApi = useForm()
