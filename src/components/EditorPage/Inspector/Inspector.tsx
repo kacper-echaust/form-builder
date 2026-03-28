@@ -63,7 +63,13 @@ const Inspector = () => {
   }
 
   return (
-    <Box w="250px" p="4" borderLeft="1px solid #eee" flexShrink={0}>
+    <Box
+      w={{ base: '100%', lg: '250px' }}
+      p="4"
+      borderLeft={{ base: '', lg: '1px solid #eee' }}
+      flexShrink={0}
+      textAlign="center"
+    >
       <Box mb="4" fontWeight="bold" fontSize="lg">
         Inspector Fields
       </Box>

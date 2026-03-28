@@ -10,6 +10,7 @@ const SingleField = ({ field }: { field: Field }) => {
 
   return (
     <Button
+      fontSize={{ base: '10px', md: '14px' }}
       ref={setNodeRef}
       {...attributes}
       {...listeners}

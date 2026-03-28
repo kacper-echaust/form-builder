@@ -172,7 +172,7 @@ const FormPreview = () => {
       alignItems="center"
       flexDirection="column"
     >
-      <Heading position="absolute" top={10} size="3xl">
+      <Heading position="absolute" top={{ base: 20, lg: 10 }} size="3xl">
         Form Builder
       </Heading>
       <form onSubmit={handleSubmit} style={{ width: '50%', marginTop: '50px' }}>

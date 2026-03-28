@@ -33,7 +33,9 @@ const Canvas = () => {
       ref={setNodeRef}
       flex="1"
       p="6"
-      minH="100vh"
+      mx="4"
+      minHeight={{ base: '50vh', md: '100vh' }}
+      minWidth={{ base: '80vw', md: '50vw' }}
       flexShrink={0}
       bgColor="#fafafa"
     >
@@ -52,7 +54,7 @@ const Canvas = () => {
           <Box
             onClick={() => handleEdit(field.uid)}
             key={field.uid}
-            p="4"
+            p={{ base: 2, md: 4 }}
             color="black"
             border={field.isEdit ? '2px solid' : '1px solid #ddd'}
             borderColor={field.isEdit ? 'gray.500' : 'black'}
@@ -61,12 +63,17 @@ const Canvas = () => {
             cursor="pointer"
             display="flex"
             justifyContent="space-between"
+            fontSize={{ base: '12px', md: '16px' }}
           >
             {field.name}
             {field.isEdit && (
-              <Flex justifyContent="space-between" width="60px" zIndex={99}>
+              <Flex
+                justifyContent="space-between"
+                width={{ base: '40px', md: '60px' }}
+                zIndex={99}
+              >
                 <Icon
-                  size="md"
+                  size={{ base: 'sm', md: 'md' }}
                   aria-label="trash"
                   _hover={{
                     color: 'white',
@@ -78,7 +85,7 @@ const Canvas = () => {
                 >
                   <FaTrash />
                 </Icon>
-                <Icon size="md" aria-label="draw">
+                <Icon size={{ base: 'sm', md: 'md' }} aria-label="draw">
                   <MdDraw />
                 </Icon>
               </Flex>
