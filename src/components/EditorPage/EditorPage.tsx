@@ -2,7 +2,14 @@ import { Flex } from '@chakra-ui/react'
 import { SideBar } from './SideBar'
 import { Canvas } from './Canvas'
 import { Inspector } from './Inspector/Inspector'
-import { DndContext, type DragEndEvent } from '@dnd-kit/core'
+import {
+  DndContext,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  type DragEndEvent,
+} from '@dnd-kit/core'
 import { useCanvasFields } from '../../hooks/useCanvasFields'
 import { CanvasFieldsContext } from '../../context/CanvasFieldsContext'
 import { useContext } from 'react'
@@ -12,15 +19,28 @@ import { handleDragEndLogic } from '../../utils/handleDragEndLogic'
 const EditorPage = () => {
   const { handleAddFieldToCanvas } = useCanvasFields()
   const { error } = useContext(CanvasFieldsContext)
-
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 200,
+        tolerance: 5,
+      },
+    })
+  )
   const handleDragEnd = (event: DragEndEvent) => {
     handleDragEndLogic(event, handleAddFieldToCanvas)
   }
 
   return (
-    <Flex height="100vh" alignItems="center" justifyContent="space-around">
+    <Flex
+      minHeight="100vh"
+      alignItems="center"
+      justifyContent={{ base: 'center', lg: 'space-around' }}
+      wrap="wrap"
+    >
       {error && <ErrorBaner error={error} key={error} />}
-      <DndContext onDragEnd={handleDragEnd}>
+      <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
         <SideBar />
         <Canvas />
       </DndContext>

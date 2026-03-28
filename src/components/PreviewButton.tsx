@@ -24,7 +24,7 @@ const PreviewButton = ({ setPreview, preview }: Props) => {
     setError('')
   }
   return (
-    <Button onClick={TogglePreview} position="absolute" top={5} left={5}>
+    <Button onClick={TogglePreview} position="absolute" top={5} left={3}>
       {preview ? 'Go to edit' : 'Live preview'}
     </Button>
   )

@@ -13,11 +13,20 @@ const fields = [
 
 const SideBar = () => {
   return (
-    <Box w="250px" p="4" borderRight="1px solid #eee" flexShrink={0}>
+    <Box
+      w={{ base: '100vw', lg: '200px' }}
+      p="4"
+      borderRight={{ base: '', lg: '1px solid #eee' }}
+      flexShrink={0}
+    >
       <Box mb="4" fontWeight="bold" fontSize="lg">
         Form Fields
       </Box>
-      <Grid templateColumns="repeat(2,1fr)" gap="4">
+      <Grid
+        templateColumns={{ base: 'repeat(4,1fr)', lg: 'repeat(2,1fr)' }}
+        gap="4"
+        touchAction="none"
+      >
         {fields.map((field) => (
           <SingleField field={field} key={field.id} />
         ))}
