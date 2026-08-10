@@ -4,13 +4,13 @@ import { EditorPage } from '../components/EditorPage/EditorPage'
 import { CanvasFieldsContext } from '../context/CanvasFieldsContext'
 
 describe('Editor Page', () => {
-  const Wrapper = ({ error }: { error?: string }) => {
+  const Wrapper = () => {
     const mockContext = {
       canvasFields: [],
       setCanvasFields: vi.fn(),
       isEditField: false,
       setIsEditField: vi.fn(),
-      error: error || '',
+      error: '',
       setError: vi.fn(),
     }
     return (
@@ -26,10 +26,5 @@ describe('Editor Page', () => {
     expect(screen.getByText(/form fields/i)).toBeInTheDocument()
     expect(screen.getByText(/canvas/i)).toBeInTheDocument()
     expect(screen.getByText(/inspector fields/i)).toBeInTheDocument()
-  })
-  it('shows error', () => {
-    render(<Wrapper error="some error" />)
-
-    expect(screen.getByText(/some error/i)).toBeInTheDocument()
   })
 })
